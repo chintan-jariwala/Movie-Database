@@ -4,10 +4,11 @@
     android:layout_height="fill_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:fitsSystemWindows="true"
-    tools:context="chintanjariwala.com.moviedatabase.LoginActivity"
+    tools:context="chintanjariwala.com.moviedatabase.Activity.LoginActivity"
     >
     
     <LinearLayout
+        android:id="@+id/containerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="56dp"
@@ -26,6 +27,7 @@
             android:textAllCaps="true" />
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/etEmailWrapper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -40,6 +42,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/etPasswordWrapper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"

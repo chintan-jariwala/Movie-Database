@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:fitsSystemWindows="true"
-    tools:context="chintanjariwala.com.moviedatabase.SignupActivity">
+    tools:context="chintanjariwala.com.moviedatabase.Activity.SignupActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

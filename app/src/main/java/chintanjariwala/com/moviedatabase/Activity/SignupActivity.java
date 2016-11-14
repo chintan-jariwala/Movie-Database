@@ -1,14 +1,18 @@
-package chintanjariwala.com.moviedatabase;
+package chintanjariwala.com.moviedatabase.Activity;
 
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import chintanjariwala.com.moviedatabase.R;
+import chintanjariwala.com.moviedatabase.Users;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -40,6 +44,8 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void signUp() {
+        Log.d(TAG,"Inside Signup clicked");
+
         if(!validate()){
             onSignupFailed();
             return;
@@ -47,8 +53,7 @@ public class SignupActivity extends AppCompatActivity {
 
         btnSignup.setEnabled(false);
 
-        final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this,
-                R.style.AppTheme);
+        final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Creating Account...");
         progressDialog.show();
@@ -57,7 +62,8 @@ public class SignupActivity extends AppCompatActivity {
         String password = etPassword.getText().toString();
         String name = etname.getText().toString();
 
-        //Signup logic
+        Users user = new Users(name,password,email);
+        user.save();
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
@@ -69,7 +75,6 @@ public class SignupActivity extends AppCompatActivity {
                         progressDialog.dismiss();
                     }
                 }, 3000);
-
     }
 
     private void onSignupSuccess() {
@@ -110,7 +115,7 @@ public class SignupActivity extends AppCompatActivity {
         }else{
             etname.setError(null);
         }
-
+        Log.d(TAG,"Validation result: "+goodToGo);
         return goodToGo;
     }
 

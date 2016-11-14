@@ -6,4 +6,19 @@
 
     <string name="action_settings">Settings</string>
     <string name="login_Title">Your Movie Database</string>
+    <string name="myPrefs">MyPrefs</string>
+    <string name="TMDB_api_key">5f55d38bb5e5daaf119af5c124a67aa9</string>
+    <string name="nav_bar_home">Home</string>
+    <string name="nav_bar_trending">Trending</string>
+    <string name="nav_bar_share">Share</string>
+    <string name="nav_bar_send">Send</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="nav_item_activity_titles">
+        <item>Home</item>
+        <item>Trending</item>
+    </string-array>
+
 </resources>
