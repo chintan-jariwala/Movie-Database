@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
     private TextView tvNavEmail = null;
     private Toolbar toolbar;
     //Base URL to make calls
-    final String baseURL = "https://api.themoviedb.org/3";
 
     //index for current nav_menu item
     private static int navItemIndex = 0;
@@ -69,8 +68,6 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
 
         //Setup the navigation bar
         setupNavBar();
-        
-        getTheTrendingData();
 
         setupNavigationView();
 
@@ -182,12 +179,7 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
         navigationView.getMenu().getItem(navItemIndex).setChecked(true);
     }
 
-    private void getTheTrendingData() {
-        Uri builtURI = Uri.parse(baseURL).buildUpon()
-                .appendPath("movie").appendPath("now_playing").appendQueryParameter("api_key",getString(R.string.TMDB_api_key))
-                .appendQueryParameter("language","en-US").build();
-        Log.d(TAG, "getTheTrendingData: "+ builtURI.toString() );
-    }
+
 
     private void setupNavBar() {
         SharedPreferences sharedPreferences = getSharedPreferences(String.valueOf(R.string .myPrefs), Context.MODE_PRIVATE);
