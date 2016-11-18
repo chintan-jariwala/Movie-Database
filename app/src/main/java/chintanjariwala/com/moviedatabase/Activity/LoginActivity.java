@@ -1,4 +1,4 @@
-package chintanjariwala.com.moviedatabase.Activity;
+package chintanjariwala.com.moviedatabase.activity;
 
 import android.app.ProgressDialog;
 import android.content.Context;

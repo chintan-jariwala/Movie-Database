@@ -20,6 +20,8 @@
     <string-array name="nav_item_activity_titles">
         <item>Home</item>
         <item>Trending</item>
+        <item>Top Rated Movies</item>
     </string-array>
+    <string name="title_activity_movie_details">MovieDetails</string>
 
 </resources>

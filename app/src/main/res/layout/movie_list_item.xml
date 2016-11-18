@@ -6,13 +6,14 @@
     android:paddingLeft="@dimen/size_word"
     android:paddingRight="@dimen/size_word"
     android:paddingTop="@dimen/size_byte"
+    android:clickable="true"
     >
     <ImageView
         android:id="@+id/movieThumbnail"
-        android:layout_width="@dimen/movie_thumbnail_width"
-        android:layout_height="@dimen/movie_thumbnail_height"
+        android:layout_height="125dp"
         android:layout_centerVertical="true"
-        android:contentDescription="Movie poster" />
+        android:contentDescription="Movie poster"
+        android:layout_width="80dp" />
 
     <TextView
         android:id="@+id/movieTitle"
@@ -21,7 +22,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/movieThumbnail"
-        android:layout_marginLeft="56dp"
+        android:layout_marginLeft="85dp"
         android:alpha="0.87"
         android:gravity="right"
         android:padding="@dimen/size_half_byte"

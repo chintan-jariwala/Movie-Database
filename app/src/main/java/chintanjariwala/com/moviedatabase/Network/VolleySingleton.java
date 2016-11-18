@@ -1,4 +1,4 @@
-package chintanjariwala.com.moviedatabase.Network;
+package chintanjariwala.com.moviedatabase.network;
 
 import android.graphics.Bitmap;
 import android.util.LruCache;
@@ -7,7 +7,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
-import chintanjariwala.com.moviedatabase.App.AppController;
+import chintanjariwala.com.moviedatabase.app.AppController;
 
 /**
  * Created by chint on 11/15/2016.
@@ -20,8 +20,8 @@ public class VolleySingleton {
     private RequestQueue requestQueue;
 
     public static final String base_request_url = "https://api.themoviedb.org/3";
-    public static final String base_image_url = "https://image.tmdb.org/t/p/w150";
-
+    public static final String base_image_url = "https://image.tmdb.org/t/p/w300";
+    public static final String base_image_url_500 = "https://image.tmdb.org/t/p/w300";
 
     private VolleySingleton(){
         requestQueue = Volley.newRequestQueue(AppController.getAppContext());

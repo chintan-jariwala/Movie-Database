@@ -1,4 +1,4 @@
-package chintanjariwala.com.moviedatabase.Utils;
+package chintanjariwala.com.moviedatabase.utils;
 
 /**
  * Created by chint on 11/15/2016.

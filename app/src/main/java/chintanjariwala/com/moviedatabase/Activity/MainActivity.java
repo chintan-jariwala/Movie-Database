@@ -1,4 +1,4 @@
-package chintanjariwala.com.moviedatabase.Activity;
+package chintanjariwala.com.moviedatabase.activity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -18,11 +18,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import chintanjariwala.com.moviedatabase.Fragment.HomeFragment;
-import chintanjariwala.com.moviedatabase.Fragment.TrendingFragment;
+import chintanjariwala.com.moviedatabase.fragment.HomeFragment;
+import chintanjariwala.com.moviedatabase.fragment.TopRatedFragment;
+import chintanjariwala.com.moviedatabase.fragment.TrendingFragment;
 import chintanjariwala.com.moviedatabase.R;
 
 public class MainActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener, TrendingFragment.OnFragmentInteractionListener
@@ -91,6 +91,10 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
                     case R.id.nav_trending:
                         navItemIndex = 1;
                         CURRENT_TAG = TAG_TRENDING;
+                        break;
+                    case R.id.nav_top:
+                        navItemIndex = 2;
+                        CURRENT_TAG = TAG_TOP;
                         break;
                     default:
                         navItemIndex = 0;
@@ -166,6 +170,9 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
                 // photos
                 TrendingFragment trendingFragment= new TrendingFragment();
                 return trendingFragment;
+            case 2:
+                TopRatedFragment topRatedFragment = new TopRatedFragment();
+                return topRatedFragment;
             default:
                 return new HomeFragment();
         }

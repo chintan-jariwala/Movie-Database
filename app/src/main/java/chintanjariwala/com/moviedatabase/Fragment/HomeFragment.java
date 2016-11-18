@@ -1,4 +1,4 @@
-package chintanjariwala.com.moviedatabase.Fragment;
+package chintanjariwala.com.moviedatabase.fragment;
 
 import android.content.Context;
 import android.net.Uri;
@@ -28,11 +28,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import chintanjariwala.com.moviedatabase.Adapters.HomeAdapter;
-import chintanjariwala.com.moviedatabase.Network.VolleySingleton;
-import chintanjariwala.com.moviedatabase.Pojo.Movie;
+import chintanjariwala.com.moviedatabase.adapters.MovieListAdapter;
+import chintanjariwala.com.moviedatabase.network.VolleySingleton;
+import chintanjariwala.com.moviedatabase.pojo.Movie;
 import chintanjariwala.com.moviedatabase.R;
-import static chintanjariwala.com.moviedatabase.Utils.Keys.*;
+import static chintanjariwala.com.moviedatabase.utils.Keys.*;
 
 
 public class HomeFragment extends Fragment {
@@ -52,11 +52,11 @@ public class HomeFragment extends Fragment {
     private ArrayList<Movie> listMovies = new ArrayList<>();
     private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private RecyclerView nowPlaying;
-    private HomeAdapter homeAdapter;
+    private MovieListAdapter homeAdapter;
+
     public HomeFragment() {
         // Required empty public constructor
     }
-
 
     public static HomeFragment newInstance(String param1, String param2) {
         HomeFragment fragment = new HomeFragment();
@@ -107,13 +107,33 @@ public class HomeFragment extends Fragment {
                 JSONArray arrayMovies = response.getJSONArray(KEY_MOVIES);
                 for (int i = 0; i < arrayMovies.length() ; i++) {
                     JSONObject currentMovie = arrayMovies.getJSONObject(i);
-                    long id = currentMovie.getLong(KEY_ID);
-                    String title = currentMovie.getString(KEY_TITLE);
-                    String releaseDate = currentMovie.getString(KEY_RELEASE_DATE);
-                    double voteAverage = currentMovie.getDouble(KEY_VOTE);
-                    String url_thumbnail = currentMovie.getString(KEY_POSTER);
+                    long id = 0;
+                    if(currentMovie.has(KEY_ID)){
+                        id = currentMovie.getLong(KEY_ID);
+                    }
+                    String title = "Title not there";
+                    if(currentMovie.has(KEY_TITLE)){
+                        title = currentMovie.getString(KEY_TITLE);
+                    }
+
+                    String releaseDate = "0000-00-00";
+                    if(currentMovie.has(KEY_RELEASE_DATE)){
+                        releaseDate = currentMovie.getString(KEY_RELEASE_DATE);
+                    }
+
+                    double voteAverage = -1;
+                    if(currentMovie.has(KEY_VOTE)){
+                        voteAverage = currentMovie.getDouble(KEY_VOTE);
+                    }
+                    String url_thumbnail = "null";
+                    if(currentMovie.has(KEY_POSTER)){
+                        url_thumbnail = currentMovie.getString(KEY_POSTER);
+                    }
                     Date curMovieDate = dateFormat.parse(releaseDate);
-                    String overview = currentMovie.getString(KEY_DESCRIPTION);
+                    String overview = "Description not there";
+                    if(currentMovie.has(KEY_DESCRIPTION)){
+                        overview = currentMovie.getString(KEY_DESCRIPTION);
+                    }
 
                     Movie movie = new Movie(id,title, curMovieDate, voteAverage, url_thumbnail,overview);
                     Log.d(TAG, "parseJSONOResponse: " + currentMovie.getString(KEY_ID) + " " + currentMovie.getString(KEY_TITLE));
@@ -144,7 +164,7 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         nowPlaying = (RecyclerView) view.findViewById(R.id.nowPlayingMovies);
         nowPlaying.setLayoutManager(new LinearLayoutManager(getActivity()));
-        homeAdapter = new HomeAdapter(getActivity());
+        homeAdapter = new MovieListAdapter(getActivity());
         nowPlaying.setAdapter(homeAdapter);
         sendJSONrequest();
         return view;
@@ -173,6 +193,8 @@ public class HomeFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
+
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name

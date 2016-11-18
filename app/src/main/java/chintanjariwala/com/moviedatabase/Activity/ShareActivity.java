@@ -1,4 +1,4 @@
-package chintanjariwala.com.moviedatabase.Activity;
+package chintanjariwala.com.moviedatabase.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

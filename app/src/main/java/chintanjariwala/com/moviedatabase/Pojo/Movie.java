@@ -1,4 +1,4 @@
-package chintanjariwala.com.moviedatabase.Pojo;
+package chintanjariwala.com.moviedatabase.pojo;
 
 import java.util.Date;
 

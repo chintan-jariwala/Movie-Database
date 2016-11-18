@@ -1,8 +1,8 @@
 package chintanjariwala.com.moviedatabase.fragment;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -41,32 +41,31 @@ import static chintanjariwala.com.moviedatabase.utils.Keys.KEY_RELEASE_DATE;
 import static chintanjariwala.com.moviedatabase.utils.Keys.KEY_TITLE;
 import static chintanjariwala.com.moviedatabase.utils.Keys.KEY_VOTE;
 
-public class TrendingFragment extends Fragment {
 
+public class TopRatedFragment extends Fragment {
 
-    private OnFragmentInteractionListener mListener;
-    private static final String TAG = TrendingFragment.class.getSimpleName();
+    private static final String TAG = TopRatedFragment.class.getSimpleName();
     private VolleySingleton volleySingleton;
     private ImageLoader imageLoader;
     private RequestQueue requestQueue;
 
     private ArrayList<Movie> listMovies = new ArrayList<>();
     private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    private RecyclerView latest;
+    private RecyclerView topMovies;
     private MovieListAdapter movieListAdapter;
 
     private String baseURL = VolleySingleton.base_request_url;
 
-    public TrendingFragment() {
+    public TopRatedFragment() {
         // Required empty public constructor
     }
 
-      @Override
-    public void onCreate(Bundle savedInstanceState) {
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-          Log.d(TAG, "onCreate: " + baseURL);
-          volleySingleton = VolleySingleton.getInstance();
-          requestQueue = volleySingleton.getRequestQueue();
+        Log.d(TAG, "onCreate: " + baseURL);
+        volleySingleton = VolleySingleton.getInstance();
+        requestQueue = volleySingleton.getRequestQueue();
     }
 
     public void sendJSONRequest(){
@@ -138,10 +137,9 @@ public class TrendingFragment extends Fragment {
         return listMovies;
 
     }
-
     private String getTheTrendingData() {
         Uri builtURI = Uri.parse(baseURL).buildUpon()
-                .appendPath("movie").appendPath("popular").appendQueryParameter("api_key",getString(R.string.TMDB_api_key))
+                .appendPath("movie").appendPath("top_rated").appendQueryParameter("api_key",getString(R.string.TMDB_api_key))
                 .appendQueryParameter("language","en-US").build();
         Log.d(TAG, "getTheTrendingData: "+ builtURI.toString() );
         return builtURI.toString();
@@ -151,41 +149,13 @@ public class TrendingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_trending, container, false);
-        latest = (RecyclerView) view.findViewById(R.id.nowPopularMovies);
-        latest.setLayoutManager(new LinearLayoutManager(getActivity()));
+        View view = inflater.inflate(R.layout.fragment_top_rated, container, false);
+        topMovies = (RecyclerView) view.findViewById(R.id.allTimeTopRated);
+        topMovies.setLayoutManager(new LinearLayoutManager(getActivity()));
         movieListAdapter = new MovieListAdapter(getActivity());
-        latest.setAdapter(movieListAdapter);
+        topMovies.setAdapter(movieListAdapter);
         sendJSONRequest();
         return view;
     }
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }
