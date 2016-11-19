@@ -8,6 +8,8 @@
     <color name="secondary_text">#757575</color>
     <color name="icons">#FFFFFF</color>
     <color name="divider">#BDBDBD</color>
+    <color name="movieItemBackground">#424242</color>
+    <color name="movieItemText">#FFFFFF</color>
 
     <color name="primary_darker">#303F9F</color>
 

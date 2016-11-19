@@ -21,6 +21,9 @@
         <item>Home</item>
         <item>Trending</item>
         <item>Top Rated Movies</item>
+        <item>Latest</item>
+        <item>Trending</item>
+        <item>Airing Today</item>
     </string-array>
     <string name="title_activity_movie_details">MovieDetails</string>
 

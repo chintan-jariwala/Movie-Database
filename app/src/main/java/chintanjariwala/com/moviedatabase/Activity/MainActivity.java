@@ -18,12 +18,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import chintanjariwala.com.moviedatabase.fragment.HomeFragment;
+import chintanjariwala.com.moviedatabase.fragment.SearchResultsFragment;
 import chintanjariwala.com.moviedatabase.fragment.TopRatedFragment;
 import chintanjariwala.com.moviedatabase.fragment.TrendingFragment;
 import chintanjariwala.com.moviedatabase.R;
+import chintanjariwala.com.moviedatabase.fragment.TvAiringTodayFragment;
+import chintanjariwala.com.moviedatabase.fragment.TvNowPlayingFragment;
+import chintanjariwala.com.moviedatabase.fragment.TvTrendingFragment;
 
 public class MainActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener, TrendingFragment.OnFragmentInteractionListener
 {
@@ -33,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
     private TextView tvNavName;
     private TextView tvNavEmail = null;
     private Toolbar toolbar;
+    private EditText searchText;
+    private Button searchAnything;
     //Base URL to make calls
 
     //index for current nav_menu item
@@ -45,6 +53,11 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
     private static final String TAG_HOME = "home";
     private static final String TAG_TRENDING = "photos";
     private static final String TAG_TOP = "movies";
+    private static final String TAG_POPULAR_TV = "popularTV";
+    private static final String TAG_TRENDING_TV = "TrendingTV";
+    private static final String TAG_AIR_TODAY = "AirTodayTV";
+    private static final String TAG_SEARCH_RESULT = "SearchResult";
+
     public static String CURRENT_TAG = TAG_HOME;
 
     private String[] activityTitles;
@@ -77,6 +90,20 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
             loadHomeFragment();
         }
 
+        searchAnything.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("searchQuery",searchText.getText().toString().trim());
+                Fragment fragment = new SearchResultsFragment();
+                fragment.setArguments(bundle);
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
+                        android.R.anim.fade_out);
+                fragmentTransaction.replace(R.id.frame, fragment, TAG_SEARCH_RESULT);
+                fragmentTransaction.commitAllowingStateLoss();
+            }
+        });
     }
 
     private void setupNavigationView() {
@@ -95,6 +122,18 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
                     case R.id.nav_top:
                         navItemIndex = 2;
                         CURRENT_TAG = TAG_TOP;
+                        break;
+                    case R.id.nav_tv_latest:
+                        navItemIndex = 3;
+                        CURRENT_TAG = TAG_POPULAR_TV;
+                        break;
+                    case R.id.nav_tv_trending:
+                        navItemIndex = 4;
+                        CURRENT_TAG = TAG_TRENDING_TV;
+                        break;
+                    case R.id.nav_tv_today:
+                        navItemIndex = 5;
+                        CURRENT_TAG = TAG_AIR_TODAY;
                         break;
                     default:
                         navItemIndex = 0;
@@ -173,6 +212,15 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
             case 2:
                 TopRatedFragment topRatedFragment = new TopRatedFragment();
                 return topRatedFragment;
+            case 3:
+                TvTrendingFragment tvrending = new TvTrendingFragment();
+                return tvrending;
+            case 4:
+                TvNowPlayingFragment tvNowPlayingFragment = new TvNowPlayingFragment();
+                return tvNowPlayingFragment;
+            case 5:
+                TvAiringTodayFragment tvAiringTodayFragment = new TvAiringTodayFragment();
+                return tvAiringTodayFragment;
             default:
                 return new HomeFragment();
         }
@@ -183,6 +231,7 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
     }
 
     private void selectNavMenu() {
+        Log.d(TAG, "selectNavMenu: " + navigationView.getMenu().toString());
         navigationView.getMenu().getItem(navItemIndex).setChecked(true);
     }
 
@@ -213,6 +262,10 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
         navHeader = navigationView.getHeaderView(0);
         tvNavName = (TextView) navHeader.findViewById(R.id.drawer_layout);
         tvNavEmail = (TextView) navHeader.findViewById(R.id.tvNavEmail);
+
+        //For the search items
+        searchAnything = (Button) findViewById(R.id.searchAnythingButton);
+        searchText = (EditText) findViewById(R.id.searchAnything);
     }
 
     @Override

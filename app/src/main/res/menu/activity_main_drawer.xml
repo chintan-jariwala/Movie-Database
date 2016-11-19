@@ -1,20 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+
+    <group android:checkableBehavior="single"
+        >
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
             android:title="@string/nav_bar_home" />
         <item
             android:id="@+id/nav_trending"
-            android:icon="@drawable/ic_menu_gallery"
             android:title="@string/nav_bar_trending" />
         <item
             android:id="@+id/nav_top"
-            android:icon="@drawable/ic_menu_slideshow"
             android:title="Top 100" />
+        <item
+            android:id="@+id/nav_tv_latest"
+            android:title="Latest" />
+        <item
+            android:id="@+id/nav_tv_trending"
+            android:title="Trending" />
+        <item
+            android:id="@+id/nav_tv_today"
+            android:title="Airing Today" />
     </group>
+
+
+
+
 
     <item android:title="Communicate">
         <menu>

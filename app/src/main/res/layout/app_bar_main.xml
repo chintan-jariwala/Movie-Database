@@ -18,6 +18,25 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/searchAnything"
+                android:hint="Search for anything"
+                android:textColor="@color/movieItemText"
+                android:layout_weight="0.3"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/searchAnythingButton"
+                android:text="Search"
+                android:layout_weight="0.7"/>
+
+        </LinearLayout>
 
     </android.support.design.widget.AppBarLayout>
 

@@ -73,9 +73,9 @@ public class MovieDetails extends AppCompatActivity {
         if(response == null && response.length() == 0){
             return;
         }
-
+        try {
         if (response.has("backdrop_path")){
-            try {
+
                 String image = imageURL + response.getString("backdrop_path");
                 imageLoader.get(image, new ImageLoader.ImageListener() {
                     @Override
@@ -88,9 +88,32 @@ public class MovieDetails extends AppCompatActivity {
 
                     }
                 });
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+
+        }
+        if (response.has("original_title")){
+            String title = response.getString("original_title");
+            movieTitle.setText(title);
+        }
+        if (response.has("overview")){
+            String overview = response.getString("overview");
+            movieDescription.setText(overview);
+        }
+        if(response.has("poster_path")){
+            String image = imageURL + response.getString("poster_path");
+            imageLoader.get(image, new ImageLoader.ImageListener() {
+                @Override
+                public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate) {
+                    moviePosterThumbnail.setImageBitmap(response.getBitmap());
+                }
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+            });
+        }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 

@@ -22,5 +22,8 @@ public class Keys {
 
     public static final String KEY_RELEASE_DATE = "release_date";
 
+    public static final String KEY_TITLE_TV  = "name";
+
+    public static final String KEY_FIRST_AIR_DATE  = "first_air_date";
 
 }
