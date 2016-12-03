@@ -97,20 +97,14 @@ public class LoginActivity extends AppCompatActivity {
         String email = etEmail.getText().toString();
         String password = etPassword.getText().toString();
         String name = null;
-        List<Users> users = Users.find(Users.class, "email = ? and passwrold = ?",email,password);
-        if(users != null){
-            for(Users user : users){
-                    userIsThere = true;
-                    Log.d(TAG,user.name + " " + user.email + " " + user.passwrold);
-                    name = user.name;
-            }
-        }
 
         SharedPreferences sharedPreferences  = getSharedPreferences(String.valueOf(R.string.myPrefs), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("name",name);
-        editor.putString("email",email);
-        editor.commit();
+        String emailWeHad = sharedPreferences.getString("email","");
+        String passWeHad = sharedPreferences.getString("password","");
+
+        if(email.equalsIgnoreCase(emailWeHad) && password.equalsIgnoreCase(passWeHad)){
+            userIsThere = true;
+        }
 
         final boolean finalUserIsThere = userIsThere;
         new android.os.Handler().postDelayed(new Runnable() {

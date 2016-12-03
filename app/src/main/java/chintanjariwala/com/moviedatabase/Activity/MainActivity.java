@@ -30,7 +30,6 @@ import chintanjariwala.com.moviedatabase.R;
 import chintanjariwala.com.moviedatabase.fragment.TvAiringTodayFragment;
 import chintanjariwala.com.moviedatabase.fragment.TvNowPlayingFragment;
 import chintanjariwala.com.moviedatabase.fragment.TvTrendingFragment;
-
 public class MainActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener, TrendingFragment.OnFragmentInteractionListener
 {
     private NavigationView navigationView;

@@ -1,6 +1,7 @@
 package chintanjariwala.com.moviedatabase.activity;
 
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -62,8 +63,12 @@ public class SignupActivity extends AppCompatActivity {
         String password = etPassword.getText().toString();
         String name = etname.getText().toString();
 
-        Users user = new Users(name,password,email);
-        user.save();
+        SharedPreferences preferences = getSharedPreferences(String.valueOf(R.string.myPrefs),MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("name",name);
+        editor.putString("password",password);
+        editor.putString("email", email);
+        editor.commit();
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
